@@ -6,7 +6,6 @@ import { Footer } from '@/components/layout/Footer'
 
 // Força renderização dinâmica para evitar 404 no Vercel
 export const dynamic = 'force-dynamic';
-export const revalidate = 0; // Desabilita cache
 
 export default function NewMTRPage() {
   return (

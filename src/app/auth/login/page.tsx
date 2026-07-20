@@ -10,7 +10,6 @@ import { getSupabaseClient } from '@/lib/supabase'
 
 // Força renderização dinâmica para evitar 404 no Vercel
 export const dynamic = 'force-dynamic';
-export const revalidate = 0; // Desabilita cache
 
 export default function LoginPage() {
   const router = useRouter()

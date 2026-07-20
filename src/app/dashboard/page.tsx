@@ -10,7 +10,6 @@ import { Footer } from '@/components/layout/Footer'
 
 // Força renderização dinâmica para evitar 404 no Vercel
 export const dynamic = 'force-dynamic';
-export const revalidate = 0; // Desabilita cache
 
 export default function DashboardPage() {
   return (
@@ -124,7 +123,7 @@ export default function DashboardPage() {
               <Card className="p-6">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="font-semibold text-lg">Coleta Agendada</h3>
+                    <h3 className="text-lg font-semibold">Coleta Agendada</h3>
                     <p className="text-neutral-textSecondary">
                       25/07/2026 às 14:00
                     </p>
