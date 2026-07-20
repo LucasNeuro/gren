@@ -56,17 +56,27 @@ export async function uploadBlob(
  */
 export async function downloadBlob(path: string): Promise<{ url: string } | null> {
   try {
-    const blob = await get(path, { access: 'private' });
+    const response = await get(path, { access: 'private' });
     
-    // Verifica se blob é nulo
-    if (!blob) {
-      console.error('Blob não encontrado:', path);
-      return null;
+    // A API do @vercel/blob retorna um objeto com 'blob' que tem a URL
+    if (response && typeof response === 'object' && 'blob' in response) {
+      const blob = (response as any).blob;
+      if (blob && 'url' in blob) {
+        return {
+          url: blob.url,
+        };
+      }
     }
-
-    return {
-      url: blob.url,
-    };
+    
+    // Se não tiver a URL no formato esperado, tenta acessar diretamente
+    if (response && typeof response === 'object' && 'url' in response) {
+      return {
+        url: (response as any).url,
+      };
+    }
+    
+    console.error('Blob não encontrado ou formato inválido:', path);
+    return null;
   } catch (error) {
     console.error('Erro ao baixar blob:', error);
     return null;
