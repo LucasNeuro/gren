@@ -1,35 +1,24 @@
 /**
  * Vercel Blob Storage para o GrenFlow
- * 
  * Funções para gerenciar arquivos no Blob Storage da Vercel.
- * Ideal para:
- * - Armazenar MTRs/CDFs em PDF
- * - Imagens de perfil
- * - Fotos de coletas
- * - Logos de empresas
  */
 
 import { put, del, list, get } from '@vercel/blob';
 
 // Tipos de arquivos permitidos no GrenFlow
 export type BlobFileType = 
-  | 'mtr-pdf'        // MTR em PDF
-  | 'cdf-pdf'        // CDF em PDF
-  | 'profile-image'  // Foto de perfil
-  | 'collection-photo' // Foto de coleta
-  | 'company-logo'   // Logo de empresa
-  | 'report-backup'  // Backup de relatório
-;
+  | 'mtr-pdf'
+  | 'cdf-pdf'
+  | 'profile-image'
+  | 'collection-photo'
+  | 'company-logo'
+  | 'report-backup';
 
-// Configuração de acesso (público ou privado)
+// Configuração de acesso
 export type BlobAccess = 'public' | 'private';
 
 /**
  * Sobe um arquivo para o Vercel Blob Storage
- * @param fileName - Nome do arquivo (ex: 'mtr/MTR-2026-00042.pdf')
- * @param file - Arquivo (File, Blob, ou string)
- * @param options - Opções (tipo, acesso, etc.)
- * @returns URL do arquivo
  */
 export async function uploadBlob(
   fileName: string,
@@ -42,16 +31,14 @@ export async function uploadBlob(
 ): Promise<{ url: string; path: string } | null> {
   const { access = 'private', addRandomSuffix = true } = options;
   
-  // Adiciona timestamp para evitar conflitos
   const finalFileName = addRandomSuffix 
     ? `${Date.now()}-${fileName}` 
     : fileName;
 
   try {
-    // Sobe o arquivo para o Blob Storage
     const blob = await put(finalFileName, file, { 
       access,
-      addRandomSuffix: false, // Já tratamos isso acima
+      addRandomSuffix: false,
     });
 
     return {
@@ -66,15 +53,17 @@ export async function uploadBlob(
 
 /**
  * Baixa um arquivo do Vercel Blob Storage
- * @param path - Caminho do arquivo (ex: 'mtr/MTR-2026-00042.pdf')
- * @returns URL do arquivo
  */
-export async function downloadBlob(path: string): Promise<{ 
-  url: string; 
-} | null> {
+export async function downloadBlob(path: string): Promise<{ url: string } | null> {
   try {
-    // A função get do @vercel/blob exige options com access
     const blob = await get(path, { access: 'private' });
+    
+    // Verifica se blob é nulo
+    if (!blob) {
+      console.error('Blob não encontrado:', path);
+      return null;
+    }
+
     return {
       url: blob.url,
     };
@@ -86,8 +75,6 @@ export async function downloadBlob(path: string): Promise<{
 
 /**
  * Lista arquivos no Vercel Blob Storage
- * @param prefix - Prefixo para filtrar (ex: 'mtr/')
- * @returns Lista de blobs
  */
 export async function listBlobs(prefix: string = ''): Promise<{ 
   blobs: { path: string; url: string; size: number; uploadedAt: Date }[];
@@ -110,8 +97,6 @@ export async function listBlobs(prefix: string = ''): Promise<{
 
 /**
  * Deleta um arquivo do Vercel Blob Storage
- * @param path - Caminho do arquivo
- * @returns Boolean (sucesso ou falha)
  */
 export async function deleteBlob(path: string): Promise<boolean> {
   try {
@@ -127,7 +112,6 @@ export async function deleteBlob(path: string): Promise<boolean> {
  * Funções específicas para o GrenFlow
  */
 
-// Upload de MTR em PDF
 export async function uploadMTRPDF(
   mtrId: string,
   pdfFile: File | Blob,
@@ -145,7 +129,6 @@ export async function uploadMTRPDF(
   }
 }
 
-// Upload de foto de coleta
 export async function uploadCollectionPhoto(
   collectionId: string,
   photoFile: File | Blob,
@@ -163,7 +146,6 @@ export async function uploadCollectionPhoto(
   }
 }
 
-// Upload de logo de empresa
 export async function uploadCompanyLogo(
   companyId: string,
   logoFile: File | Blob
@@ -175,7 +157,7 @@ export async function uploadCompanyLogo(
     const path = `companies/${companyId}/logo.${extension}`;
     return await uploadBlob(path, logoFile, { 
       type: 'company-logo', 
-      access: 'public' // Logos podem ser públicos
+      access: 'public' 
     });
   } catch (error) {
     console.error('Erro ao upload de logo:', error);
