@@ -42,6 +42,3 @@ export const createServerSupabaseClient = () => {
   
   return createClient(supabaseUrl, supabaseAnonKey);
 };
-
-// Cliente padrão para usar em componentes cliente
-export const supabase = getSupabaseClient();
