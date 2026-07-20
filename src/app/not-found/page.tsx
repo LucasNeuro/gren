@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 
 // Força renderização dinâmica para evitar 404 no Vercel
-export const dynamic = 'force-dynamic';
 
 export default function NotFoundPage() {
   return (
