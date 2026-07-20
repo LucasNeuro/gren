@@ -9,6 +9,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 
 // Força SSR para evitar 404 no Vercel
+export const dynamic = 'force-dynamic';
 
 export default function DashboardPage() {
   return (
@@ -112,27 +113,6 @@ export default function DashboardPage() {
                   <div>
                     <p className="text-neutral-textSecondary">Gerador:</p>
                     <p className="font-medium">Oficina Auto Peças LTDA</p>
-                  </div>
-                  <div>
-                    <p className="text-neutral-textSecondary">Operador:</p>
-                    <p className="font-medium">EcoColeta Transportes</p>
-                  </div>
-                </div>
-              </Card>
-              <Card className="p-6">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-lg font-semibold">Coleta Agendada</h3>
-                    <p className="text-neutral-textSecondary">
-                      25/07/2026 às 14:00
-                    </p>
-                  </div>
-                  <Badge variant="pending">Pendente</Badge>
-                </div>
-                <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="text-neutral-textSecondary">Resíduo:</p>
-                    <p className="font-medium">Óleo Lubrificante (500L)</p>
                   </div>
                   <div>
                     <p className="text-neutral-textSecondary">Operador:</p>

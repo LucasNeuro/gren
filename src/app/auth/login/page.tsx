@@ -9,6 +9,7 @@ import { Alert } from '@/components/ui/Alert'
 import { getSupabaseClient } from '@/lib/supabase'
 
 // Força SSR para evitar 404 no Vercel
+export const dynamic = 'force-dynamic';
 
 export default function LoginPage() {
   const router = useRouter()
