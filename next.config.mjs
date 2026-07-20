@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Configurações de imagem
   images: {
     unoptimized: true,
   },
-  // Desabilita o SSG (Static Site Generation) para todas as páginas
-  // e força SSR (Server-Side Rendering)
-  output: 'standalone',
+  // Força SSR para todas as páginas
+  experimental: {
+    forceDynamic: true, // Isso é válido no Next.js 14.2+
+  },
 };
 
 export default nextConfig;
