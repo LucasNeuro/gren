@@ -16,7 +16,7 @@
 import { get, getAll } from '@vercel/edge-config';
 
 // Tipos para as configurações do GrenFlow
-interface GrenFlowConfig {
+export interface GrenFlowConfig {
   // Configurações globais
   maintenance: {
     active: boolean;

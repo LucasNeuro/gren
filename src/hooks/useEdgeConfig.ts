@@ -9,7 +9,7 @@ import {
   isMaintenanceActive,
   getPricing,
   getWasteTypes,
-  GrenFlowConfig,
+  type GrenFlowConfig,
 } from '@/lib/edgeConfig';
 
 /**
@@ -25,7 +25,8 @@ export function useEdgeConfig() {
     const loadConfig = async () => {
       try {
         setLoading(true);
-        const data = await getGrenFlowConfig();
+        // Obter todas as configurações
+        const data = await getEdgeConfig<Partial<GrenFlowConfig>>('');
         setConfig(data);
       } catch (err) {
         setError('Erro ao carregar configurações');
