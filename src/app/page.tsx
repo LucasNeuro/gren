@@ -7,7 +7,6 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 
 // Força SSR para a página raiz
-export const dynamic = 'force-dynamic';
 
 export default function HomePage() {
   return (
