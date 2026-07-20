@@ -73,7 +73,8 @@ export async function downloadBlob(path: string): Promise<{
   url: string; 
 } | null> {
   try {
-    const blob = await get(path);
+    // A função get do @vercel/blob exige 2 argumentos: path e options
+    const blob = await get(path, { });
     return {
       url: blob.url,
     };
