@@ -8,6 +8,9 @@ import { Badge } from '@/components/ui/Badge'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 
+// Força renderização dinâmica para evitar 404 no Vercel
+export const dynamic = 'force-dynamic';
+
 export default function DashboardPage() {
   return (
     <div className="min-h-screen flex flex-col">
@@ -35,7 +38,7 @@ export default function DashboardPage() {
               <p className="text-sm opacity-90">MTRs Emitidos</p>
             </Card>
             <Card variant="statistics" className="p-6">
-              <div className="text-3xl mb-2">🏷️</div>
+              <div className="text-3xl mb-2">🏳️</div>
               <h3 className="text-2xl font-bold">12</h3>
               <p className="text-sm opacity-90">CDFs Gerados</p>
             </Card>

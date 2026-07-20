@@ -8,6 +8,9 @@ import { Input } from '@/components/ui/Input'
 import { Alert } from '@/components/ui/Alert'
 import { getSupabaseClient } from '@/lib/supabase'
 
+// Força renderização dinâmica para evitar 404 no Vercel
+export const dynamic = 'force-dynamic';
+
 export default function SignupPage() {
   const router = useRouter()
   const [name, setName] = useState('')
