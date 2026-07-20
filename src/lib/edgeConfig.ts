@@ -134,4 +134,3 @@ export async function getWasteTypes() {
 /**
  * Middleware para injetar configurações do Edge Config nas requisições
  */
-export type { GrenFlowConfig };
