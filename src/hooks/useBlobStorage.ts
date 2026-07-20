@@ -20,7 +20,7 @@ export interface UseBlobStorageReturn {
     file: File | Blob | string,
     options?: { type?: BlobFileType; access?: BlobAccess; addRandomSuffix?: boolean }
   ) => Promise<{ url: string; path: string } | null>;
-  downloadFile: (path: string) => Promise<{ url: string; blob?: Blob } | null>;
+  downloadFile: (path: string) => Promise<{ url: string } | null>;
   listFiles: (prefix: string) => Promise<{ 
     blobs: { path: string; url: string; size: number; uploadedAt: Date }[];
   } | null>;

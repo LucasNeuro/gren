@@ -2,24 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&family=Roboto+Mono&display=swap');
-
-:root {
-  --primary-green: #2E8B57;
-  --primary-blue: #0066CC;
-  --secondary-green: #4CAF50;
-  --secondary-blue: #2196F3;
-  --success: #4CAF50;
-  --warning: #FFC107;
-  --error: #F44336;
-  --info: #2196F3;
-  --text-primary: #424242;
-  --text-secondary: #757575;
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F5F5F5;
-  --bg-dark: #212121;
-  --border: #E0E0E0;
+@layer base {
+  :root {
+    --primary-green: #2E8B57;
+    --primary-blue: #0066CC;
+    --secondary-green: #4CAF50;
+    --secondary-blue: #2196F3;
+    --success: #4CAF50;
+    --warning: #FFC107;
+    --error: #F44336;
+    --info: #2196F3;
+    --text-primary: #424242;
+    --text-secondary: #757575;
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F5F5F5;
+    --bg-dark: #212121;
+    --border: #E0E0E0;
+  }
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&family=Roboto+Mono&display=swap');
 
 * {
   box-sizing: border-box;

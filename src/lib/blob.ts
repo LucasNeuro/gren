@@ -1,3 +1,14 @@
+/**
+ * Vercel Blob Storage para o GrenFlow
+ * 
+ * Funções para gerenciar arquivos no Blob Storage da Vercel.
+ * Ideal para:
+ * - Armazenar MTRs/CDFs em PDF
+ * - Imagens de perfil
+ * - Fotos de coletas
+ * - Logos de empresas
+ */
+
 import { put, del, list, get } from '@vercel/blob';
 
 // Tipos de arquivos permitidos no GrenFlow
@@ -28,7 +39,7 @@ export async function uploadBlob(
     access?: BlobAccess;
     addRandomSuffix?: boolean;
   } = {}
-): Promise<{ url: string; path: string }> {
+): Promise<{ url: string; path: string } | null> {
   const { access = 'private', addRandomSuffix = true } = options;
   
   // Adiciona timestamp para evitar conflitos
@@ -36,30 +47,36 @@ export async function uploadBlob(
     ? `${Date.now()}-${fileName}` 
     : fileName;
 
-  // Sobe o arquivo para o Blob Storage
-  const blob = await put(finalFileName, file, { 
-    access,
-    addRandomSuffix: false, // Já tratamos isso acima
-  });
+  try {
+    // Sobe o arquivo para o Blob Storage
+    const blob = await put(finalFileName, file, { 
+      access,
+      addRandomSuffix: false, // Já tratamos isso acima
+    });
 
-  return {
-    url: blob.url,
-    path: finalFileName,
-  };
+    return {
+      url: blob.url,
+      path: finalFileName,
+    };
+  } catch (error) {
+    console.error('Erro ao fazer upload do blob:', error);
+    return null;
+  }
 }
 
 /**
  * Baixa um arquivo do Vercel Blob Storage
  * @param path - Caminho do arquivo (ex: 'mtr/MTR-2026-00042.pdf')
- * @returns URL do arquivo ou o Blob
+ * @returns URL do arquivo
  */
 export async function downloadBlob(path: string): Promise<{ 
   url: string; 
-  blob?: Blob;
 } | null> {
   try {
-    const { url } = await get(path);
-    return { url };
+    const blob = await get(path);
+    return {
+      url: blob.url,
+    };
   } catch (error) {
     console.error('Erro ao baixar blob:', error);
     return null;
@@ -151,7 +168,10 @@ export async function uploadCompanyLogo(
   logoFile: File | Blob
 ): Promise<{ url: string; path: string } | null> {
   try {
-    const path = `companies/${companyId}/logo.${logoFile instanceof File ? logoFile.name.split('.').pop() : 'png'}`;
+    const extension = logoFile instanceof File 
+      ? logoFile.name.split('.').pop() || 'png' 
+      : 'png';
+    const path = `companies/${companyId}/logo.${extension}`;
     return await uploadBlob(path, logoFile, { 
       type: 'company-logo', 
       access: 'public' // Logos podem ser públicos
