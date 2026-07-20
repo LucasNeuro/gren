@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/Badge'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 
-// Força renderização dinâmica (para evitar 404 no Vercel)
+// Força renderização dinâmica para evitar 404 no Vercel
 export const dynamic = 'force-dynamic';
 
 export default function HomePage() {
@@ -45,7 +45,7 @@ export default function HomePage() {
             <div className="hidden lg:block">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
                 <div className="w-full h-64 bg-gradient-to-br from-primary-green to-primary-blue rounded-xl flex items-center justify-center">
-                  <span className="text-6xl">🗑️ → 🚛 → ♻️</span>
+                  <span className="text-6xl">📄 → 🚛 → ♻️</span>
                 </div>
               </div>
             </div>
@@ -184,7 +184,7 @@ export default function HomePage() {
               </p>
             </Card>
             <Card variant="statistics" className="p-6">
-              <div className="text-3xl mb-4">🏷️</div>
+              <div className="text-3xl mb-4">🏳️</div>
               <h3 className="text-lg font-semibold mb-2">CDF Automático</h3>
               <p className="text-sm opacity-90">
                 Geração automática de Certificados de Destinação Final.

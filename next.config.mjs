@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Habilita o App Router (já é padrão no Next.js 14)
-  experimental: {
-    appDir: true,
-  },
   // Configurações de imagem (otimização para o Vercel)
   images: {
     unoptimized: true, // Desabilita otimização de imagem (evita problemas com storage externo)

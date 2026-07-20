@@ -4,6 +4,10 @@ import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 
+// Força renderização dinâmica para evitar 404 no Vercel
+export const dynamic = 'force-dynamic';
+export const revalidate = 0; // Desabilita cache
+
 export default function NotFoundPage() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-neutral-bgSecondary py-12 px-4 sm:px-6 lg:px-8">

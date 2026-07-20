@@ -1,5 +1,5 @@
 /**
- * Middleware para o GrenFlow
+ * Middleware para o GrenFlow (versão simplificada)
  * 
  * Este middleware:
  * 1. Adiciona headers de segurança
@@ -18,6 +18,7 @@ const PUBLIC_PATHS = [
   '/_next/*',
   '/favicon.ico',
   '/public/*',
+  '/not-found',
 ];
 
 // Caminhos que exigem autenticação
@@ -26,6 +27,8 @@ const PROTECTED_PATHS = [
   '/generator/*',
   '/operator/*',
   '/admin/*',
+  '/onboarding',
+  '/marketplace',
 ];
 
 export async function middleware(request: NextRequest) {
