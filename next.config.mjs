@@ -2,6 +2,7 @@
 const nextConfig = {
   // Desabilita o cache de páginas estáticas
   cache: false,
+  
   // Configurações de imagem
   images: {
     unoptimized: true,
